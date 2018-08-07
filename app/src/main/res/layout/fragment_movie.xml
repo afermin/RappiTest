@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.rappitest.vo.Status" />
+
+        <import type="com.example.rappitest.vo.Resource" />
+
+        <variable
+            name="movie"
+            type="com.example.rappitest.vo.movie.Movie" />
+
+        <variable
+            name="movieDetail"
+            type="com.example.rappitest.vo.movie.MovieDetail" />
+
+        <variable
+            name="movieResource"
+            type="Resource" />
+
+        <variable
+            name="contributorsStatus"
+            type="Status" />
+
+        <variable
+            name="retryCallback"
+            type="com.example.rappitest.ui.common.RetryCallback" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="121dp"
+                    android:layout_height="180dp"
+                    app:imageUrl="@{movie.posterPath}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/name"
+                        style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{movie.name}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:visibleGone="@{movie != null}"
+                        tools:text="title" />
+
+                    <TextView
+                        android:id="@+id/stars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_star_16dp"
+                        android:gravity="center"
+                        android:layout_gravity="bottom"
+                        android:text="@{`` + movie.voteAverage}"
+                        tools:text="5" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{movie.overview}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:visibleGone="@{movie != null}"
+                tools:text="description of the user" />
+
+            <include
+                layout="@layout/loading_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                app:callback="@{() -> retryCallback.retry()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:resource="@{movieResource}" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
