@@ -17,14 +17,14 @@ import java.io.IOException
  */
 class MovieFetchNextSearchPageTask constructor(
         private val movieService: MovieService,
-        private val category: MovieRepository.Category,
+        private val category: String,
         private val db: SearchDB
 ) : Runnable {
     private val _liveData = MutableLiveData<Resource<Boolean>>()
     val liveData: LiveData<Resource<Boolean>> = _liveData
 
     override fun run() {
-        val current = db.searchResultDao().findSearchResult(category.name)
+        val current = db.searchResultDao().findSearchResult(category)
         if (current == null) {
             _liveData.postValue(null)
             return
@@ -36,13 +36,13 @@ class MovieFetchNextSearchPageTask constructor(
         }
         val newValue = try {
 
-            val nextPage = page+1
-            val response = when(category){
-                MovieRepository.Category.MOVIE_TOP_RATED ->
+            val nextPage = page + 1
+            val response = when (category) {
+                MovieRepository.Category.MOVIE_TOP_RATED.name ->
                     movieService.getTopRated(nextPage).execute()
-                MovieRepository.Category.MOVIE_UPCOMING ->
+                MovieRepository.Category.MOVIE_UPCOMING.name ->
                     movieService.getUpcoming(nextPage).execute()
-                MovieRepository.Category.MOVIE_POPULAR ->
+                else ->
                     movieService.getPopular(nextPage).execute()
             }
 
@@ -56,8 +56,8 @@ class MovieFetchNextSearchPageTask constructor(
 
                     ids.addAll(apiResponse.body.results.map { it.id })
                     val merged = SearchResult(
-                        category.name, ids,
-                        apiResponse.body.totalPages, apiResponse.body.page
+                            category, ids,
+                            apiResponse.body.totalPages, apiResponse.body.page
                     )
                     try {
                         db.beginTransaction()
@@ -67,7 +67,7 @@ class MovieFetchNextSearchPageTask constructor(
                     } finally {
                         db.endTransaction()
                     }
-                    Resource.success(apiResponse.nextPage != null)
+                    Resource.success(apiResponse.body.page != apiResponse.body.totalPages)
                 }
                 is ApiEmptyResponse -> {
                     Resource.success(false)

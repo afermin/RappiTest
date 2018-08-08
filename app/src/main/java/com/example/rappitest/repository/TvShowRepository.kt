@@ -32,7 +32,7 @@ class TvShowRepository @Inject constructor(
         private val tvShowDao: TvShowDao,
         private val searchResultDao: SearchResultDao,
         private val tvShowService: TvShowService
-) {
+) : PaginateRepository() {
 
     enum class Category {
         TV_SHOW_TOP_RATED, TV_SHOW_POPULAR
@@ -53,7 +53,8 @@ class TvShowRepository @Inject constructor(
             override fun createCall() = tvShowService.get(id)
         }.asLiveData()
     }
-    fun searchNextPage(category: Category): LiveData<Resource<Boolean>> {
+
+    override fun searchNextPage(category: String): LiveData<Resource<Boolean>> {
         val fetchNextSearchPageTask = TvShowFetchNextSearchPageTask(
                 tvShowService = tvShowService,
                 category = category,

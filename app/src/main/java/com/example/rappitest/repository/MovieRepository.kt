@@ -31,7 +31,7 @@ class MovieRepository @Inject constructor(
         private val movieDao: MovieDao,
         private val searchResultDao: SearchResultDao,
         private val movieService: MovieService
-) {
+) : PaginateRepository() {
 
     enum class Category {
         MOVIE_TOP_RATED, MOVIE_UPCOMING, MOVIE_POPULAR
@@ -51,7 +51,7 @@ class MovieRepository @Inject constructor(
         }.asLiveData()
     }
 
-    fun searchNextPage(category: Category): LiveData<Resource<Boolean>> {
+    override fun searchNextPage(category: String): LiveData<Resource<Boolean>> {
         val fetchNextSearchPageTask = MovieFetchNextSearchPageTask(
                 movieService = movieService,
                 category = category,

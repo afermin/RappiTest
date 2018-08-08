@@ -1,6 +1,5 @@
 package com.example.rappitest.vo
 
-import android.support.annotation.NonNull
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -12,9 +11,10 @@ abstract class ProductionBaseData {
     var id: Int = 0
     @field:SerializedName("name", alternate = ["title"])
     var name: String = ""
-    @NonNull
     @field:SerializedName("genre_ids")
     var genreIds: List<Int>? = null
+    @field:SerializedName("backdrop_path")
+    var backdropPath: String? = null
     @field:SerializedName("popularity")
     var popularity: Double = 0.0
     @field:SerializedName("original_language")
@@ -23,7 +23,6 @@ abstract class ProductionBaseData {
     var voteAverage: Double = 0.0
     @field:SerializedName("overview")
     var overview: String = ""
-    @NonNull
     @field:SerializedName("poster_path")
     var posterPath: String = ""
 
