@@ -16,6 +16,7 @@
 
 package com.example.rappitest.vo
 
+import android.util.Log
 import com.example.rappitest.vo.Status.ERROR
 import com.example.rappitest.vo.Status.LOADING
 import com.example.rappitest.vo.Status.SUCCESS
@@ -27,7 +28,10 @@ import com.example.rappitest.vo.Status.SUCCESS
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {
         fun <T> success(data: T?): Resource<T> {
-            return Resource(SUCCESS, data, null)
+            Log.d("TvShowFetchNext", "success(data: T?)")
+            val r = Resource(SUCCESS, data, null)
+            Log.d("TvShowFetchNext", "success(data: T?)")
+            return r
         }
 
         fun <T> error(msg: String, data: T?): Resource<T> {

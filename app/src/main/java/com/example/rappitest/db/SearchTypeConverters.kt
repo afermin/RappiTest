@@ -32,9 +32,15 @@ object SearchTypeConverters {
 
     @TypeConverter
     @JvmStatic
+    fun stringToString(string: String?): String? {
+        return string ?: ""
+    }
+
+    @TypeConverter
+    @JvmStatic
     fun toStringList(string: String?): List<String>? {
         if (string == null) {
-            return null
+            return ArrayList()
         }
         val type = object : TypeToken<List<String>>() {
 
@@ -46,7 +52,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun fromStringList(list: List<String>?): String? {
         if (list == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<String>>() {
 
@@ -61,7 +67,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun toString(o: MovieDetail.BelongsToCollection?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<MovieDetail.BelongsToCollection>() {}.type
         return Gson().toJson(o, type)
@@ -70,9 +76,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toBelongsToCollection(string: String?): MovieDetail.BelongsToCollection? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<MovieDetail.BelongsToCollection>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -81,7 +84,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun productionCompanyToString(o: List<MovieDetail.ProductionCompany>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<MovieDetail.ProductionCompany>>() {}.type
         return Gson().toJson(o, type)
@@ -90,9 +93,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toProductionCompany(string: String?): List<MovieDetail.ProductionCompany>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<MovieDetail.ProductionCompany>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -101,7 +101,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun productionCountriesToString(o: List<MovieDetail.ProductionCountry>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<MovieDetail.ProductionCountry>>() {}.type
         return Gson().toJson(o, type)
@@ -110,9 +110,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toProductionCountry(string: String?): List<MovieDetail.ProductionCountry>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<MovieDetail.ProductionCountry>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -121,7 +118,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun genresToString(o: List<MovieDetail.Genre>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<MovieDetail.Genre>>() {}.type
         return Gson().toJson(o, type)
@@ -130,9 +127,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toGenre(string: String?): List<MovieDetail.Genre>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<MovieDetail.Genre>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -141,7 +135,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun spokenLanguagesToString(o: List<MovieDetail.SpokenLanguage>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<MovieDetail.SpokenLanguage>>() {}.type
         return Gson().toJson(o, type)
@@ -150,21 +144,18 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toSpokenLanguage(string: String?): List<MovieDetail.SpokenLanguage>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<MovieDetail.SpokenLanguage>>() {}.type
         return Gson().fromJson(string, type)
     }
 
     /**
-    * TvShowDetail
-    * */
+     * TvShowDetail
+     * */
     @TypeConverter
     @JvmStatic
     fun createdBytoString(o: List<TvShowDetail.CreatedBy>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<TvShowDetail.CreatedBy>>() {}.type
         return Gson().toJson(o, type)
@@ -173,9 +164,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toCreatedBy(string: String?): List<TvShowDetail.CreatedBy>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<TvShowDetail.CreatedBy>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -184,7 +172,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun tvProductionCompanyToString(o: List<TvShowDetail.ProductionCompany>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<TvShowDetail.ProductionCompany>>() {}.type
         return Gson().toJson(o, type)
@@ -193,9 +181,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toTvProductionCompany(string: String?): List<TvShowDetail.ProductionCompany>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<TvShowDetail.ProductionCompany>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -204,7 +189,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun tvGenresToString(o: List<TvShowDetail.Genre>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<TvShowDetail.Genre>>() {}.type
         return Gson().toJson(o, type)
@@ -213,9 +198,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toTvGenre(string: String?): List<TvShowDetail.Genre>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<TvShowDetail.Genre>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -224,7 +206,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun tvSeasonToString(o: List<TvShowDetail.Season>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<TvShowDetail.Season>>() {}.type
         return Gson().toJson(o, type)
@@ -233,9 +215,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toTvSeason(string: String?): List<TvShowDetail.Season>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<TvShowDetail.Season>>() {}.type
         return Gson().fromJson(string, type)
     }
@@ -244,7 +223,7 @@ object SearchTypeConverters {
     @JvmStatic
     fun tvNetworkToString(o: List<TvShowDetail.Network>?): String? {
         if (o == null) {
-            return null
+            return ""
         }
         val type = object : TypeToken<List<TvShowDetail.Network>>() {}.type
         return Gson().toJson(o, type)
@@ -253,9 +232,6 @@ object SearchTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toTvNetwork(string: String?): List<TvShowDetail.Network>? {
-        if (string == null) {
-            return null
-        }
         val type = object : TypeToken<List<TvShowDetail.Network>>() {}.type
         return Gson().fromJson(string, type)
     }

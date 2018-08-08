@@ -78,7 +78,7 @@ data class ApiSuccessResponse<T>(
                 try {
                     Integer.parseInt(matcher.group(1))
                 } catch (ex: NumberFormatException) {
-                    Timber.w("cannot parse next page from %s", next)
+                    Timber.w("cannot parse page page from %s", next)
                     null
                 }
             }
@@ -88,7 +88,7 @@ data class ApiSuccessResponse<T>(
     companion object {
         private val LINK_PATTERN = Pattern.compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
         private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")
-        private const val NEXT_LINK = "next"
+        private const val NEXT_LINK = "page"
 
         private fun String.extractLinks(): Map<String, String> {
             val links = mutableMapOf<String, String>()

@@ -18,6 +18,7 @@ package com.example.rappitest.binding
 
 import android.databinding.BindingAdapter
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import javax.inject.Inject
@@ -29,6 +30,7 @@ import javax.inject.Inject
 class FragmentBindingAdapters @Inject constructor(val fragment: Fragment) {
     @BindingAdapter("imageUrl")
     fun bindImage(imageView: ImageView, url: String?) {
-        Glide.with(fragment).load("https://image.tmdb.org/t/p/original/$url").into(imageView)
+        Log.d("FragmentBindingAdapters", "bindImage: https://image.tmdb.org/t/p/w500$url")
+        Glide.with(fragment).load("https://image.tmdb.org/t/p/w200$url").into(imageView)
     }
 }

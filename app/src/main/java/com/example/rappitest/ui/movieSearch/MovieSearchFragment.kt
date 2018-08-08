@@ -81,7 +81,6 @@ class MovieSearchFragment : Fragment(), Injectable {
             )
         }
         binding.list.adapter = rvAdapter
-        binding.list.layoutManager = GridLayoutManager(context, 2)
         adapter = rvAdapter
 
         initSearchInputListener()
@@ -115,7 +114,7 @@ class MovieSearchFragment : Fragment(), Injectable {
 
 
     private fun doSearch(v: View) {
-        //val query = binding.input.text.toString()
+        //val request = binding.input.text.toString()
         // Dismiss keyboard
         dismissKeyboard(v.windowToken)
     }

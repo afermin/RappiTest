@@ -13,7 +13,7 @@ import com.example.rappitest.vo.SearchResult
 import java.io.IOException
 
 /**
- * A task that reads the search result in the database and fetches the next page, if it has one.
+ * A task that reads the search result in the database and fetches the page page, if it has one.
  */
 class MovieFetchNextSearchPageTask constructor(
         private val movieService: MovieService,
@@ -29,13 +29,14 @@ class MovieFetchNextSearchPageTask constructor(
             _liveData.postValue(null)
             return
         }
-        val nextPage = current.next
-        if (nextPage == null) {
+        val page = current.page
+        if (page == current.totalCount) {
             _liveData.postValue(Resource.success(false))
             return
         }
         val newValue = try {
 
+            val nextPage = page+1
             val response = when(category){
                 MovieRepository.Category.MOVIE_TOP_RATED ->
                     movieService.getTopRated(nextPage).execute()
@@ -48,7 +49,7 @@ class MovieFetchNextSearchPageTask constructor(
             val apiResponse = ApiResponse.create(response)
             when (apiResponse) {
                 is ApiSuccessResponse -> {
-                    // we merge all repo ids into 1 list so that it is easier to fetch the
+                    // we merge all ids into 1 list so that it is easier to fetch the
                     // result list.
                     val ids = arrayListOf<Int>()
                     ids.addAll(current.repoIds)
@@ -56,7 +57,7 @@ class MovieFetchNextSearchPageTask constructor(
                     ids.addAll(apiResponse.body.results.map { it.id })
                     val merged = SearchResult(
                         category.name, ids,
-                        apiResponse.body.totalPages, apiResponse.nextPage
+                        apiResponse.body.totalPages, apiResponse.body.page
                     )
                     try {
                         db.beginTransaction()

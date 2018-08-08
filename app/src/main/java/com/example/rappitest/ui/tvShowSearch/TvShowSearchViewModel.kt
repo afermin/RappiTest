@@ -1,28 +1,28 @@
 package com.example.rappitest.ui.tvShowSearch
 
-import android.arch.lifecycle.*
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.Transformations
+import android.util.Log
 import com.example.rappitest.repository.TvShowRepository
 import com.example.rappitest.ui.SearchViewModel
-import com.example.rappitest.util.AbsentLiveData
 import com.example.rappitest.vo.Resource
 import com.example.rappitest.vo.Status
 import com.example.rappitest.vo.tv.TvShow
-import java.util.*
 import javax.inject.Inject
 
 /**
  * Created by Alexander Fermin (alexfer06@gmail.com) on 06/08/2018.
  */
-class TvShowSearchViewModel @Inject constructor(movieRepository: TvShowRepository)
-    : SearchViewModel() {
+class TvShowSearchViewModel @Inject constructor(private val tvShowRepository: TvShowRepository)
+    : SearchViewModel<TvShow>() {
 
-    private val nextPageHandler = NextPageHandler(movieRepository)
+    private val nextPageHandler = NextPageHandler(tvShowRepository)
 
     val results: LiveData<Resource<List<TvShow>>> = Transformations
             .switchMap(categoryIdItemPosition) { search ->
-                movieRepository.search(getCategory())
-
+                tvShowRepository.search(getCategory())
             }
 
     val loadMoreStatus: LiveData<LoadMoreState>
@@ -39,11 +39,13 @@ class TvShowSearchViewModel @Inject constructor(movieRepository: TvShowRepositor
         }
     }
 
-    override fun query() {
-
+    override fun request() : LiveData<Resource<List<TvShow>>> {
+        nextPageHandler.reset()
+        return tvShowRepository.search(getCategory())
     }
 
     fun loadNextPage() {
+        Log.d("TvShowSearchViewModel", "loadNextPage")
         nextPageHandler.queryNextPage(getCategory())
     }
 
@@ -79,9 +81,11 @@ class TvShowSearchViewModel @Inject constructor(movieRepository: TvShowRepositor
         }
 
         fun queryNextPage(category: TvShowRepository.Category) {
+            Log.d("TvShowSearchViewModel", "queryNextPage")
             if (this.category == category) {
                 return
             }
+            Log.d("TvShowSearchViewModel", "queryNextPage after")
             unregister()
             this.category = category
             nextPageLiveData = repository.searchNextPage(category)
@@ -93,12 +97,14 @@ class TvShowSearchViewModel @Inject constructor(movieRepository: TvShowRepositor
         }
 
         override fun onChanged(result: Resource<Boolean>?) {
+            Log.d("TvShowSearchViewModel", "onChanged")
             if (result == null) {
                 reset()
             } else {
                 when (result.status) {
                     Status.SUCCESS -> {
                         _hasMore = result.data == true
+                        Log.d("TvShowSearchViewModel", "_hasMore: $_hasMore")
                         unregister()
                         loadMoreState.setValue(
                                 LoadMoreState(
@@ -125,6 +131,7 @@ class TvShowSearchViewModel @Inject constructor(movieRepository: TvShowRepositor
         }
 
         private fun unregister() {
+            Log.d("TvShowSearchViewModel", "unregister")
             nextPageLiveData?.removeObserver(this)
             nextPageLiveData = null
             if (_hasMore) {

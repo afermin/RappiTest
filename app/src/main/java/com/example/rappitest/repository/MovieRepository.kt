@@ -47,10 +47,6 @@ class MovieRepository @Inject constructor(
                 movieDao.insertDetail(item)
             }
 
-            override fun shouldFetch(data: MovieDetail?) = data == null
-
-            override fun loadFromDb() = movieDao.loadDetail(id)
-
             override fun createCall() = movieService.get(id)
         }.asLiveData()
     }
@@ -74,7 +70,7 @@ class MovieRepository @Inject constructor(
                         category = category.name,
                         repoIds = repoIds,
                         totalCount = item.totalPages,
-                        next = item.nextPage
+                        page = item.page
                 )
                 db.beginTransaction()
                 try {
@@ -85,8 +81,6 @@ class MovieRepository @Inject constructor(
                     db.endTransaction()
                 }
             }
-
-            override fun shouldFetch(data: List<Movie>?) = data == null
 
             override fun loadFromDb(): LiveData<List<Movie>> {
 
@@ -99,19 +93,20 @@ class MovieRepository @Inject constructor(
                 }
             }
 
+            override fun shouldFetch(data: List<Movie>?) = true
+
             override fun createCall(): LiveData<ApiResponse<SearchResponse<Movie>>> {
                 return when (category) {
                     Category.MOVIE_TOP_RATED -> movieService.getTopRated()
                     Category.MOVIE_UPCOMING -> movieService.getUpcoming()
                     Category.MOVIE_POPULAR -> movieService.getPopular()
                 }
-
             }
 
             override fun processResponse(response: ApiSuccessResponse<SearchResponse<Movie>>)
                     : SearchResponse<Movie> {
                 val body = response.body
-                body.nextPage = response.nextPage
+                body.page = response.body.page
                 return body
             }
         }.asLiveData()

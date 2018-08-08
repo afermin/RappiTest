@@ -16,5 +16,5 @@ data class SearchResult(
         val category: String,
         val repoIds: List<Int>,
         val totalCount: Int,
-        val next: Int?
+        val page: Int
 )

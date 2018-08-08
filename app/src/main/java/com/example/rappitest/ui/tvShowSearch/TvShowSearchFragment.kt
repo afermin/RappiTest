@@ -81,7 +81,6 @@ class TvShowSearchFragment : Fragment(), Injectable {
             )
         }
         binding.list.adapter = rvAdapter
-        binding.list.layoutManager = GridLayoutManager(context, 2)
         adapter = rvAdapter
 
         binding.callback = object : RetryCallback {
@@ -111,11 +110,11 @@ class TvShowSearchFragment : Fragment(), Injectable {
     }
 
     private fun doSearch(v: View) {
-        val query = binding.input.text.toString()
+        val request = binding.input.text.toString()
         // Dismiss keyboard
         dismissKeyboard(v.windowToken)
-        binding.query = query
-        viewModel.setQuery(query)
+        binding.request = request
+        viewModel.setQuery(request)
     }
 */
     private fun initRecyclerView() {

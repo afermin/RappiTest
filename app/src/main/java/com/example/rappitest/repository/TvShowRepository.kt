@@ -48,8 +48,6 @@ class TvShowRepository @Inject constructor(
                 tvShowDao.insertDetail(item)
             }
 
-            override fun shouldFetch(data: TvShowDetail?) = data == null
-
             override fun loadFromDb() = tvShowDao.loadDetail(id)
 
             override fun createCall() = tvShowService.get(id)
@@ -74,7 +72,7 @@ class TvShowRepository @Inject constructor(
                         category = category.name,
                         repoIds = repoIds,
                         totalCount = item.totalPages,
-                        next = item.nextPage
+                        page = item.page
                 )
                 db.beginTransaction()
                 try {
@@ -85,8 +83,6 @@ class TvShowRepository @Inject constructor(
                     db.endTransaction()
                 }
             }
-
-            override fun shouldFetch(data: List<TvShow>?) = data == null
 
             override fun loadFromDb(): LiveData<List<TvShow>> {
 
@@ -104,13 +100,12 @@ class TvShowRepository @Inject constructor(
                     Category.TV_SHOW_TOP_RATED -> tvShowService.getTopRated()
                     Category.TV_SHOW_POPULAR -> tvShowService.getPopular()
                 }
-
             }
 
             override fun processResponse(response: ApiSuccessResponse<SearchResponse<TvShow>>)
                     : SearchResponse<TvShow> {
                 val body = response.body
-                body.nextPage = response.nextPage
+                body.page = response.body.page
                 return body
             }
         }.asLiveData()

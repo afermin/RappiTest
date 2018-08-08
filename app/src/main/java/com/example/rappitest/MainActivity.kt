@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //NavigationUI.setupWithNavController(navigation, findNavController(R.id.container))
+        NavigationUI.setupWithNavController(navigation, findNavController(R.id.container))
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

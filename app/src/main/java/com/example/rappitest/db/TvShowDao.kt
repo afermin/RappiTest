@@ -19,13 +19,13 @@ import java.util.*
 abstract class TvShowDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(vararg repos: TvShow)
+    abstract fun insert(vararg tvShow: TvShow)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertTvShow(repositories: List<TvShow>)
+    abstract fun insertTvShow(tvShows: List<TvShow>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun createTvShowIfNotExists(repo: TvShow): Long
+    abstract fun createTvShowIfNotExists(tvShow: TvShow): Long
 
     @Query("SELECT * FROM tv_show WHERE id = :id")
     abstract fun load(id: Int): LiveData<TvShow>
@@ -45,18 +45,18 @@ abstract class TvShowDao {
     abstract fun loadTvShows(type: String): LiveData<List<TvShow>>
 
 
-    fun loadOrdered(repoIds: List<Int>): LiveData<List<TvShow>> {
+    fun loadOrdered(tvShowIds: List<Int>): LiveData<List<TvShow>> {
         val order = SparseIntArray()
-        repoIds.withIndex().forEach {
+        tvShowIds.withIndex().forEach {
             order.put(it.value, it.index)
         }
-        return Transformations.map(loadById(repoIds)) { repositories ->
-            Collections.sort(repositories) { r1, r2 ->
+        return Transformations.map(loadById(tvShowIds)) { tvShow ->
+            Collections.sort(tvShow) { r1, r2 ->
                 val pos1 = order.get(r1.id)
                 val pos2 = order.get(r2.id)
                 pos1 - pos2
             }
-            repositories
+            tvShow
         }
     }
 

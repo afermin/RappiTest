@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.TypeConverters
 import com.example.rappitest.db.SearchTypeConverters
 
-@Entity(primaryKeys = ["query"])
+@Entity(primaryKeys = ["request"])
 @TypeConverters(SearchTypeConverters::class)
 data class RepoSearchResult(
     val query: String,
