@@ -11,7 +11,15 @@
             android:label="SearchFragment">
             <action
                 android:id="@+id/showMovie"
-                app:destination="@id/movieFragment" />
+                app:destination="@id/movieFragment"
+                app:clearTask="false"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@animator/flip_y"
+                app:launchDocument="false"
+                app:launchSingleTop="false"
+                app:popEnterAnim="@animator/flip_y_reverse"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpToInclusive="false" />
         </fragment>
         <fragment
             android:id="@+id/movieFragment"
@@ -31,7 +39,15 @@
             android:label="SearchFragment">
             <action
                 android:id="@+id/showTvShow"
-                app:destination="@id/tvShowFragment" />
+                app:destination="@id/tvShowFragment"
+                app:clearTask="false"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@animator/flip_y"
+                app:launchDocument="false"
+                app:launchSingleTop="false"
+                app:popEnterAnim="@animator/flip_y_reverse"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpToInclusive="false" />
         </fragment>
         <fragment
             android:id="@+id/tvShowFragment"
