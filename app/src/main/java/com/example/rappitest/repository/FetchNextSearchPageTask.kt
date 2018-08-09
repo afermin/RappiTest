@@ -11,7 +11,7 @@ import retrofit2.Response
 import java.io.IOException
 
 /**
- * Created by Alexander Fermin (alexfer06@gmail.com) on 08/08/2018.
+ * A task that reads the search result in the database and fetches the page page, if it has one.
  */
 abstract class FetchNextSearchPageTask<T : ProductionBaseData> constructor(
         private val category: String,

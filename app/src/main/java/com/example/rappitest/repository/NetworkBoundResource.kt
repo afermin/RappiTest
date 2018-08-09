@@ -18,7 +18,6 @@ package com.example.rappitest.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
 import android.util.Log
@@ -86,8 +85,9 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                                 // we specially request a new live data,
                                 // otherwise we will get immediately last cached value,
                                 // which may not be updated with latest results received from network.
-                                result.addSource(dbSource) { newData ->
-                                    Log.d("ApiEmptyResponse", "" + newData)
+                                Log.d("ApiSuccessResponse", "")
+                                result.addSource(loadFromDb()) { newData ->
+                                    Log.d("ApiSuccessResponse", "" + newData)
                                     setValue(Resource.success(newData))
                                 }
                             }
@@ -96,7 +96,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                     is ApiEmptyResponse -> {
                         appExecutors.mainThread().execute {
                             // reload from disk whatever we had
-                            result.addSource(dbSource) { newData ->
+                            result.addSource(loadFromDb()) { newData ->
                                 Log.d("ApiEmptyResponse", "" + newData)
                                 setValue(Resource.success(newData))
                             }

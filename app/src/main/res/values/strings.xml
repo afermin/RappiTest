@@ -12,6 +12,19 @@
 
     <string name="empty_search_result">No results for <b>%s</b></string>
 
+    <string name="youtube_url" translatable="false">https://www.youtube.com/watch?v=<b>%s</b></string>
+    <string name="release_date">Release date: <b>%s</b></string>
+    <string name="first_air_date">First air date: <b>%s</b></string>
+    <string name="language">Language: <b>%s</b></string>
+    <string name="seasons">Seasons: <b>%s</b></string>
+
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="info">Info</string>
+    <string name="fast_forward">Fast forward</string>
+    <string name="fast_rewind">Fast rewind</string>
+    <string name="minimize">Minimize</string>
+
     <array name="movie_categories">
         <item name="upcoming">Upcoming</item>
         <item name="rated">Top rated</item>

@@ -47,6 +47,8 @@ class MovieRepository @Inject constructor(
                 movieDao.insertDetail(item)
             }
 
+            override fun loadFromDb() = movieDao.loadDetail(id)
+
             override fun createCall() = movieService.get(id)
         }.asLiveData()
     }

@@ -148,6 +148,23 @@ object SearchTypeConverters {
         return Gson().fromJson(string, type)
     }
 
+    @TypeConverter
+    @JvmStatic
+    fun movieVideosToString(o: List<MovieDetail.Video>?): String? {
+        if (o == null) {
+            return ""
+        }
+        val type = object : TypeToken<List<MovieDetail.Video>>() {}.type
+        return Gson().toJson(o, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun toMovieVideos(string: String?): List<MovieDetail.Video>? {
+        val type = object : TypeToken<List<MovieDetail.Video>>() {}.type
+        return Gson().fromJson(string, type)
+    }
+
     /**
      * TvShowDetail
      * */
@@ -233,6 +250,23 @@ object SearchTypeConverters {
     @JvmStatic
     fun toTvNetwork(string: String?): List<TvShowDetail.Network>? {
         val type = object : TypeToken<List<TvShowDetail.Network>>() {}.type
+        return Gson().fromJson(string, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun tvVideosToString(o: List<TvShowDetail.Video>?): String? {
+        if (o == null) {
+            return ""
+        }
+        val type = object : TypeToken<List<TvShowDetail.Video>>() {}.type
+        return Gson().toJson(o, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun toTvVideos(string: String?): List<TvShowDetail.Video>? {
+        val type = object : TypeToken<List<TvShowDetail.Video>>() {}.type
         return Gson().fromJson(string, type)
     }
 

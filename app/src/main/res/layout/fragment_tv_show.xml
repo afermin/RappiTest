@@ -65,16 +65,42 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:visibleGone="@{tvShow != null}"
                         tools:text="title" />
+                    <TextView
+                        android:id="@+id/homepage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        app:visibleGone="@{tvShowDetail.homepage != null}"
+                        android:text="@{tvShowDetail.homepage}" />
+
+                    <TextView
+                        android:id="@+id/release"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/first_air_date(tvShowDetail.firstAirDate)}" />
 
                     <TextView
                         android:id="@+id/stars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_star_16dp"
-                        android:gravity="center"
-                        android:layout_gravity="bottom"
+                        android:gravity="center_vertical"
                         android:text="@{`` + tvShow.voteAverage}"
                         tools:text="5" />
+
+                    <TextView
+                        android:id="@+id/language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/language(tvShowDetail.originalLanguage)}" />
+
+                    <TextView
+                        android:id="@+id/sessions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/seasons(tvShowDetail.numberOfSeasons)}" />
 
                 </LinearLayout>
             </LinearLayout>

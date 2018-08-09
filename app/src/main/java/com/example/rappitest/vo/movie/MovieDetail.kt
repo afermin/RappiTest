@@ -18,36 +18,30 @@ import com.google.gson.annotations.SerializedName
 data class MovieDetail(
         @field:SerializedName("adult")
         val adult: Boolean,
-        @NonNull
         @field:SerializedName("backdrop_path")
-        val backdropPath: String,
-        @NonNull
+        val backdropPath: String?,
         @field:SerializedName("belongs_to_collection")
-        val belongsToCollection: BelongsToCollection,
+        val belongsToCollection: BelongsToCollection?,
         @field:SerializedName("budget")
         val budget: Int,
         @field:SerializedName("genres")
         val genres: List<Genre>,
-        @NonNull
         @field:SerializedName("homepage")
         val homepage: String?,
         @field:SerializedName("id")
         val id: Int,
-        @NonNull
         @field:SerializedName("imdb_id")
-        val imdbId: String,
+        val imdbId: String?,
         @field:SerializedName("original_language")
-        val originalLanguage: String,
+        val originalLanguage: String?,
         @field:SerializedName("original_title")
         val originalTitle: String,
-        @NonNull
         @field:SerializedName("overview")
-        val overview: String,
+        val overview: String?,
         @field:SerializedName("popularity")
         val popularity: Double,
-        @NonNull
         @field:SerializedName("poster_path")
-        val posterPath: String,
+        val posterPath: String?,
         @field:SerializedName("production_companies")
         val productionCompanies: List<ProductionCompany>,
         @field:SerializedName("production_countries")
@@ -56,16 +50,15 @@ data class MovieDetail(
         val releaseDate: String,
         @field:SerializedName("revenue")
         val revenue: Int,
-        @NonNull
         @field:SerializedName("runtime")
-        val runtime: Int,
+        val runtime: Int?,
         @field:SerializedName("spoken_languages")
         val spokenLanguages: List<SpokenLanguage>,
         @field:SerializedName("status")
         val status: String,
         @NonNull
         @field:SerializedName("tagline")
-        val tagline: String,
+        val tagline: String?,
         @field:SerializedName("title")
         val title: String,
         @field:SerializedName("video")
@@ -73,7 +66,9 @@ data class MovieDetail(
         @field:SerializedName("vote_average")
         val voteAverage: Double,
         @field:SerializedName("vote_count")
-        val voteCount: Int
+        val voteCount: Int,
+        @field:SerializedName("videos")
+        val videos: List<Video>?
 ) {
 
     @Entity
@@ -128,5 +123,26 @@ data class MovieDetail(
             val iso31661: String,
             @field:SerializedName("name")
             val name: String
+    )
+
+    @Entity
+    @TypeConverters(SearchTypeConverters::class)
+    data class Video(
+            @field:SerializedName("id")
+            val id: String,
+            @field:SerializedName("iso_639_1")
+            val iso6391: String,
+            @field:SerializedName("iso_3166_1")
+            val iso31661: String,
+            @field:SerializedName("key")
+            val key: String,
+            @field:SerializedName("name")
+            val name: String,
+            @field:SerializedName("site")
+            val site: String,
+            @field:SerializedName("size")
+            val size: Int,
+            @field:SerializedName("type")
+            val type: String
     )
 }

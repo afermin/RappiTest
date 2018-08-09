@@ -6,7 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:titleTextColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Widget.PictureInPicture.MovieView" parent="android:Widget">
+        <item name="android:src">@null</item>
+        <item name="android:adjustViewBounds">false</item>
     </style>
 
 </resources>

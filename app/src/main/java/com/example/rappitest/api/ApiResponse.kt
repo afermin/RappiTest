@@ -16,6 +16,7 @@
 
 package com.example.rappitest.api
 
+import android.util.Log
 import retrofit2.Response
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -34,6 +35,7 @@ sealed class ApiResponse<T> {
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
+                Log.d("ApiResponse create", body.toString())
                 if (body == null || response.code() == 204) {
                     ApiEmptyResponse()
                 } else {
@@ -56,7 +58,7 @@ sealed class ApiResponse<T> {
 }
 
 /**
- * separate class for HTTP 204 resposes so that we can make ApiSuccessResponse's body non-null.
+ * separate class for HTTP 204 responses so that we can make ApiSuccessResponse's body non-null.
  */
 class ApiEmptyResponse<T> : ApiResponse<T>()
 

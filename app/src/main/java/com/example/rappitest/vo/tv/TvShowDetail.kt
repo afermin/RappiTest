@@ -4,19 +4,20 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Index
 import android.arch.persistence.room.TypeConverters
 import com.example.rappitest.db.SearchTypeConverters
+import com.example.rappitest.vo.movie.MovieDetail
 import com.google.gson.annotations.SerializedName
 
 
 @Entity(
         tableName = "tv_show_detail",
         indices = [
-                (Index("id"))],
+            (Index("id"))],
         primaryKeys = ["id"]
 )
 @TypeConverters(SearchTypeConverters::class)
 data class TvShowDetail(
         @field:SerializedName("backdrop_path")
-        val backdropPath: String,
+        val backdropPath: String?,
         @field:SerializedName("created_by")
         val createdBy: List<CreatedBy>,
         @field:SerializedName("episode_run_time")
@@ -32,7 +33,7 @@ data class TvShowDetail(
         @field:SerializedName("in_production")
         val inProduction: Boolean,
         @field:SerializedName("languages")
-        val languages: List<String>,
+        val languages: List<String>?,
         @field:SerializedName("last_air_date")
         val lastAirDate: String,
         @field:SerializedName("name")
@@ -54,7 +55,7 @@ data class TvShowDetail(
         @field:SerializedName("popularity")
         val popularity: Double,
         @field:SerializedName("poster_path")
-        val posterPath: String,
+        val posterPath: String?,
         @field:SerializedName("production_companies")
         val productionCompanies: List<ProductionCompany>,
         @field:SerializedName("seasons")
@@ -66,7 +67,9 @@ data class TvShowDetail(
         @field:SerializedName("vote_average")
         val voteAverage: Double,
         @field:SerializedName("vote_count")
-        val voteCount: Int
+        val voteCount: Int,
+        @field:SerializedName("videos")
+        val videos: List<MovieDetail.Video>?
 ) {
 
     data class Network(
@@ -75,7 +78,7 @@ data class TvShowDetail(
             @field:SerializedName("id")
             val id: Int,
             @field:SerializedName("logo_path")
-            val logoPath: String,
+            val logoPath: String?,
             @field:SerializedName("origin_country")
             val originCountry: String
     )
@@ -101,7 +104,7 @@ data class TvShowDetail(
             @field:SerializedName("overview")
             val overview: String,
             @field:SerializedName("poster_path")
-            val posterPath: String,
+            val posterPath: String?,
             @field:SerializedName("season_number")
             val seasonNumber: Int
     )
@@ -130,5 +133,26 @@ data class TvShowDetail(
             val name: String,
             @field:SerializedName("origin_country")
             val originCountry: String
+    )
+
+    @Entity
+    @TypeConverters(SearchTypeConverters::class)
+    data class Video(
+            @field:SerializedName("id")
+            val id: String,
+            @field:SerializedName("iso_639_1")
+            val iso6391: String,
+            @field:SerializedName("iso_3166_1")
+            val iso31661: String,
+            @field:SerializedName("key")
+            val key: String,
+            @field:SerializedName("name")
+            val name: String,
+            @field:SerializedName("site")
+            val site: String,
+            @field:SerializedName("size")
+            val size: Int,
+            @field:SerializedName("type")
+            val type: String
     )
 }
