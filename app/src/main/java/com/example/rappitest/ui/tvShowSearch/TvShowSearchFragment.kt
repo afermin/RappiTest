@@ -10,23 +10,21 @@ import android.os.Bundle
 import android.os.IBinder
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.example.rappitest.AppExecutors
+import com.example.rappitest.MainDirections
 import com.example.rappitest.R
 import com.example.rappitest.binding.FragmentDataBindingComponent
 import com.example.rappitest.databinding.FragmentSearchBinding
 import com.example.rappitest.di.Injectable
-import com.example.rappitest.ui.common.SearchListAdapter
 import com.example.rappitest.ui.common.RetryCallback
+import com.example.rappitest.ui.common.SearchListAdapter
 import com.example.rappitest.util.autoCleared
 import javax.inject.Inject
 
@@ -77,7 +75,7 @@ class TvShowSearchFragment : Fragment(), Injectable {
                 showFullName = true
         ) { item ->
             navController().navigate(
-                    TvShowSearchFragmentDirections.showTvShow(item.id)
+                    MainDirections.showTvShow(item.id)
             )
         }
         binding.list.adapter = rvAdapter
@@ -90,33 +88,6 @@ class TvShowSearchFragment : Fragment(), Injectable {
         }
     }
 
-    /*private fun initSearchInputListener() {
-        binding.input.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                doSearch(view)
-                true
-            } else {
-                false
-            }
-        }
-        binding.input.setOnKeyListener { view: View, keyCode: Int, event: KeyEvent ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                doSearch(view)
-                true
-            } else {
-                false
-            }
-        }
-    }
-
-    private fun doSearch(v: View) {
-        val request = binding.input.text.toString()
-        // Dismiss keyboard
-        dismissKeyboard(v.windowToken)
-        binding.request = request
-        viewModel.setQuery(request)
-    }
-*/
     private fun initRecyclerView() {
 
         binding.list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -145,11 +116,6 @@ class TvShowSearchFragment : Fragment(), Injectable {
                 }
             }
         })
-    }
-
-    private fun dismissKeyboard(windowToken: IBinder) {
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(windowToken, 0)
     }
 
     /**

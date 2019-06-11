@@ -29,14 +29,14 @@ class TvShowSearchViewModel @Inject constructor(private val tvShowRepository: Tv
         isMovie = false
     }
 
-    fun getCategory() : TvShowRepository.Category {
+    fun getCategory(): TvShowRepository.Category {
         return when (categoryIdItemPosition.value) {
-            0-> TvShowRepository.Category.TV_SHOW_POPULAR
-            else -> TvShowRepository.Category.TV_SHOW_TOP_RATED
+            0 -> TvShowRepository.Category.TV_SHOW_TOP_RATED
+            else -> TvShowRepository.Category.TV_SHOW_POPULAR
         }
     }
 
-    override fun request() : LiveData<Resource<List<TvShow>>> {
+    override fun request(): LiveData<Resource<List<TvShow>>> {
         nextPageHandler.reset()
         return tvShowRepository.search(getCategory())
     }

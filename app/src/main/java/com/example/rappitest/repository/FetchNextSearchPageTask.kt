@@ -35,6 +35,10 @@ abstract class FetchNextSearchPageTask<T : ProductionBaseData> constructor(
         }
         val newValue = try {
             nextPage = page + 1
+            if (nextPage == 49) {
+                Resource.success(false)
+                return
+            }
             val response = getRequest()
 
             val apiResponse = ApiResponse.create(response)

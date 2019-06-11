@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.rappitest.repository.PaginateRepository
 import com.example.rappitest.repository.TvShowRepository
@@ -118,4 +119,5 @@ abstract class SearchViewModel<T> : ViewModel() {
             )
         }
     }
+
 }

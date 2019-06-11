@@ -2,7 +2,6 @@ package com.example.rappitest.di
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import android.content.Context
 import com.example.rappitest.api.MovieService
 import com.example.rappitest.api.TvShowService
 import com.example.rappitest.db.MovieDao
@@ -63,7 +62,7 @@ class AppModule {
                     .url(url)
 
             val request = requestBuilder.build()
-             chain.proceed(request)
+            chain.proceed(request)
         }.cache(cache).addInterceptor(httpLoggingInterceptor).build()
     }
 
@@ -78,7 +77,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideCache(file: File): Cache {
-        val cacheSize : Long = 10 * 1024 * 1024 // 10 MB
+        val cacheSize: Long = 10 * 1024 * 1024 // 10 MB
         return Cache(file, cacheSize)
     }
 

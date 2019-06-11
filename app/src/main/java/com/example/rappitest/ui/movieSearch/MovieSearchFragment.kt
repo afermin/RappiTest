@@ -18,18 +18,16 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.example.rappitest.AppExecutors
+import com.example.rappitest.MainDirections
 import com.example.rappitest.R
 import com.example.rappitest.binding.FragmentDataBindingComponent
 import com.example.rappitest.databinding.FragmentSearchBinding
 import com.example.rappitest.di.Injectable
-import com.example.rappitest.ui.common.SearchListAdapter
 import com.example.rappitest.ui.common.RetryCallback
+import com.example.rappitest.ui.common.SearchListAdapter
 import com.example.rappitest.util.autoCleared
+import com.example.rappitest.vo.movie.Movie
 import javax.inject.Inject
-import android.support.v7.widget.GridLayoutManager
-import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.fragment_search.*
-import java.util.*
 
 
 //@OpenForTesting
@@ -40,6 +38,8 @@ class MovieSearchFragment : Fragment(), Injectable {
 
     @Inject
     lateinit var appExecutors: AppExecutors
+
+    private var list: MutableList<List<Movie>> = ArrayList()
 
     private var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -77,13 +77,11 @@ class MovieSearchFragment : Fragment(), Injectable {
                 showFullName = true
         ) { movie ->
             navController().navigate(
-                    MovieSearchFragmentDirections.showMovie(movie.id)
+                    MainDirections.showMovie(movie.id)
             )
         }
         binding.list.adapter = rvAdapter
         adapter = rvAdapter
-
-        initSearchInputListener()
 
         binding.callback = object : RetryCallback {
             override fun retry() {
@@ -91,32 +89,6 @@ class MovieSearchFragment : Fragment(), Injectable {
             }
         }
 
-    }
-
-    private fun initSearchInputListener() {/*
-        binding.input.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                doSearch(view)
-                true
-            } else {
-                false
-            }
-        }
-        binding.input.setOnKeyListener { view: View, keyCode: Int, event: KeyEvent ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                doSearch(view)
-                true
-            } else {
-                false
-            }
-        }*/
-    }
-
-
-    private fun doSearch(v: View) {
-        //val request = binding.input.text.toString()
-        // Dismiss keyboard
-        dismissKeyboard(v.windowToken)
     }
 
     private fun initRecyclerView() {
@@ -133,6 +105,9 @@ class MovieSearchFragment : Fragment(), Injectable {
         viewmodel.results.observe(this, Observer { result ->
             binding.searchResource = result
             binding.resultCount = result?.data?.size ?: 0
+            result?.data?.let {
+                list.add(it)
+            }
             adapter.submitList(result?.data)
         })
 

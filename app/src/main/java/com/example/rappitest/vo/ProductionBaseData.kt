@@ -24,6 +24,6 @@ abstract class ProductionBaseData {
     @field:SerializedName("overview")
     var overview: String = ""
     @field:SerializedName("poster_path")
-    var posterPath: String = ""
+    var posterPath: String? = null
 
 }

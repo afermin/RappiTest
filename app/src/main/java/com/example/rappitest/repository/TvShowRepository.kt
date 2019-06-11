@@ -44,8 +44,9 @@ class TvShowRepository @Inject constructor(
 
     fun loadMovieDetail(id: Int): LiveData<Resource<TvShowDetail>> {
         return object : NetworkBoundResource<TvShowDetail, TvShowDetail>(appExecutors) {
-            override fun saveCallResult(item: TvShowDetail) {
+            override fun saveCallResult(item: TvShowDetail): TvShowDetail {
                 tvShowDao.insertDetail(item)
+                return item
             }
 
             override fun loadFromDb() = tvShowDao.loadDetail(id)
@@ -67,7 +68,7 @@ class TvShowRepository @Inject constructor(
     fun search(category: Category): LiveData<Resource<List<TvShow>>> {
         return object : NetworkBoundResource<List<TvShow>, SearchResponse<TvShow>>(appExecutors) {
 
-            override fun saveCallResult(item: SearchResponse<TvShow>) {
+            override fun saveCallResult(item: SearchResponse<TvShow>): List<TvShow> {
                 val repoIds = item.results.map { it.id }
                 val repoSearchResult = SearchResult(
                         category = category.name,
@@ -83,6 +84,7 @@ class TvShowRepository @Inject constructor(
                 } finally {
                     db.endTransaction()
                 }
+                return item.results
             }
 
             override fun loadFromDb(): LiveData<List<TvShow>> {

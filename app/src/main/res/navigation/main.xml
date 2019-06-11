@@ -1,62 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/movieFlow">
-    <navigation
-        android:id="@+id/movieFlow"
-        app:startDestination="@id/searchFragment">
-        <fragment
-            android:id="@+id/searchFragment"
-            android:name="com.example.rappitest.ui.movieSearch.MovieSearchFragment"
-            android:label="SearchFragment">
-            <action
-                android:id="@+id/showMovie"
-                app:destination="@id/movieFragment"
-                app:clearTask="false"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@animator/flip_y"
-                app:launchDocument="false"
-                app:launchSingleTop="false"
-                app:popEnterAnim="@animator/flip_y_reverse"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"
-                app:popUpToInclusive="false" />
-        </fragment>
-        <fragment
-            android:id="@+id/movieFragment"
-            android:name="com.example.rappitest.ui.movie.MovieFragment"
-            android:label="MovieFragment">
-            <argument
-                android:name="id"
-                app:argType="integer" />
-        </fragment>
-    </navigation>
-    <navigation
-        android:id="@+id/tvShowFlow"
-        app:startDestination="@id/tvShowSearchFragment">
-        <fragment
-            android:id="@+id/tvShowSearchFragment"
-            android:name="com.example.rappitest.ui.tvShowSearch.TvShowSearchFragment"
-            android:label="SearchFragment">
-            <action
-                android:id="@+id/showTvShow"
-                app:destination="@id/tvShowFragment"
-                app:clearTask="false"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@animator/flip_y"
-                app:launchDocument="false"
-                app:launchSingleTop="false"
-                app:popEnterAnim="@animator/flip_y_reverse"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"
-                app:popUpToInclusive="false" />
-        </fragment>
-        <fragment
-            android:id="@+id/tvShowFragment"
-            android:name="com.example.rappitest.ui.tvShow.TvShowFragment"
-            android:label="TvShowFragment">
-            <argument
-                android:name="id"
-                app:argType="integer" />
-        </fragment>
-    </navigation>
+    app:startDestination="@id/movieSearchFragment">
+
+    <fragment
+        android:id="@+id/movieSearchFragment"
+        android:name="com.example.rappitest.ui.movieSearch.MovieSearchFragment"
+        android:label="SearchFragment"/>
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.rappitest.ui.movie.MovieFragment"
+        android:label="MovieFragment">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tvShowSearchFragment"
+        android:name="com.example.rappitest.ui.tvShowSearch.TvShowSearchFragment"
+        android:label="SearchFragment" />
+
+    <fragment
+        android:id="@+id/tvShowFragment"
+        android:name="com.example.rappitest.ui.tvShow.TvShowFragment"
+        android:label="TvShowFragment">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+    <action
+        android:id="@+id/showMovie"
+        app:clearTask="false"
+        app:destination="@id/movieFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@animator/flip_y"
+        app:launchDocument="false"
+        app:launchSingleTop="false"
+        app:popEnterAnim="@animator/flip_y_reverse"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/showTvShow"
+        app:clearTask="false"
+        app:destination="@id/tvShowFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@animator/flip_y"
+        app:launchDocument="false"
+        app:launchSingleTop="false"
+        app:popEnterAnim="@animator/flip_y_reverse"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpToInclusive="false" />
 
 </navigation>

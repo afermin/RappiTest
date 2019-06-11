@@ -18,10 +18,10 @@ import java.util.*
 @Dao
 abstract class TvShowDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insert(vararg tvShow: TvShow)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertTvShow(tvShows: List<TvShow>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -33,7 +33,7 @@ abstract class TvShowDao {
     @Query("SELECT * FROM tv_show_detail WHERE id = :id")
     abstract fun loadDetail(id: Int): LiveData<TvShowDetail>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertDetail(vararg tvShowDetail: TvShowDetail)
 
     @Query(

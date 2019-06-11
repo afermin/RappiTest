@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/movieFlow"
+        android:id="@+id/movieSearchFragment"
         android:icon="@drawable/ic_movies"
         android:title="@string/title_movies" />
 
     <item
-        android:id="@+id/tvShowFlow"
+        android:id="@+id/tvShowSearchFragment"
         android:icon="@drawable/ic_tv_show"
         android:title="@string/title_tv_show" />
 
