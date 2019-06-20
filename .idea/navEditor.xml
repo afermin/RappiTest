@@ -13,18 +13,6 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="searchFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
                             <option name="x" value="12" />
                             <option name="y" value="12" />
                           </Point>
@@ -32,12 +20,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="movieSearchFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="showMovie">
                     <value>
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="showMovieSearch">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="showTvShow">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="showTvShowSearch">
                     <value>
                       <LayoutPositions />
                     </value>
@@ -48,7 +51,7 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="256" />
-                            <option name="y" value="368" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -56,14 +59,7 @@
                   </entry>
                   <entry key="tvShowSearchFragment">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="368" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                 </map>

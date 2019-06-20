@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     app:startDestination="@id/movieSearchFragment">
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/movieSearchFragment"
         android:name="com.example.rappitest.ui.movieSearch.MovieSearchFragment"
-        android:label="SearchFragment"/>
+        android:label="SearchFragment" />
 
     <fragment
         android:id="@+id/movieFragment"
@@ -19,7 +19,7 @@
             app:argType="integer" />
     </fragment>
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/tvShowSearchFragment"
         android:name="com.example.rappitest.ui.tvShowSearch.TvShowSearchFragment"
         android:label="SearchFragment" />
@@ -50,6 +50,30 @@
         android:id="@+id/showTvShow"
         app:clearTask="false"
         app:destination="@id/tvShowFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@animator/flip_y"
+        app:launchDocument="false"
+        app:launchSingleTop="false"
+        app:popEnterAnim="@animator/flip_y_reverse"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/showTvShowSearch"
+        app:clearTask="false"
+        app:destination="@id/tvShowSearchFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@animator/flip_y"
+        app:launchDocument="false"
+        app:launchSingleTop="false"
+        app:popEnterAnim="@animator/flip_y_reverse"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpToInclusive="false" />
+
+    <action
+        android:id="@+id/showMovieSearch"
+        app:clearTask="false"
+        app:destination="@id/movieSearchFragment"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@animator/flip_y"
         app:launchDocument="false"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Rappi Test</string>
+    <string name="app_name">Test</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Search</string>
     <string name="title_movies">Movies</string>
